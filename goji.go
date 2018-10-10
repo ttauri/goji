@@ -34,7 +34,6 @@ func readConfig() *Config {
 func main() {
 	flag.Parse()
 	cfg := readConfig()
-	fmt.Println(cfg)
 	tp := jira.BasicAuthTransport{
 		Username: cfg.Login,
 		Password: cfg.Password,
@@ -54,7 +53,7 @@ func main() {
 		for _, issue := range issues {
 			green := color.New(color.FgGreen)
 			blue := color.New(color.FgBlue)
-			green.Printf("https://pmc.acronis.com/browse/%v ", issue.Key)
+			green.Printf("%v/browse/%v ", cfg.URL, issue.Key)
 			fmt.Print("[")
 			blue.Printf("%v", issue.Fields.Status.Name)
 			fmt.Print("] ")
